@@ -8,6 +8,20 @@ public class LoanRequestAlreadyExistsException extends RuntimeException {
     private final UUID requestId;
     private final String idempotencyKey;
 
+    public LoanRequestAlreadyExistsException(String message) {
+        super(message);
+        this.customerId = null;
+        this.requestId = null;
+        this.idempotencyKey = null;
+    }
+
+    public LoanRequestAlreadyExistsException(String message, Throwable cause) {
+        super(message, cause);
+        this.customerId = null;
+        this.requestId = null;
+        this.idempotencyKey = null;
+    }
+
     public LoanRequestAlreadyExistsException(Long customerId, UUID requestId, String idempotencyKey) {
         super(buildMessage(customerId, requestId, idempotencyKey));
         this.customerId = customerId;

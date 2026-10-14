@@ -6,6 +6,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -46,6 +47,19 @@ public class JpaLoanRequestRepository implements LoanRequestRepository {
         
         LoanRequest result = entityManager.find(LoanRequest.class, requestId);
         return Optional.ofNullable(result);
+    }
+
+    @Override
+    public List<LoanRequest> findByCustomerId(Long customerId) {
+        if (customerId == null) {
+            return List.of();
+        }
+        var query = entityManager.createQuery(
+            "SELECT lr FROM LoanRequest lr WHERE lr.customerId = :customerId",
+            LoanRequest.class
+        );
+        query.setParameter("customerId", customerId);
+        return query.getResultList();
     }
 
     @Override

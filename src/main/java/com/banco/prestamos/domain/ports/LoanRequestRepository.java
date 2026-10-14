@@ -9,6 +9,8 @@ public interface LoanRequestRepository {
 
     Optional<LoanRequest> findByRequestId(UUID requestId);
 
+    java.util.List<LoanRequest> findByCustomerId(Long customerId);
+
     Optional<LoanRequest> findByCustomerIdAndRequestId(Long customerId, UUID requestId);
 
     boolean existsByCustomerIdAndRequestId(Long customerId, UUID requestId);
