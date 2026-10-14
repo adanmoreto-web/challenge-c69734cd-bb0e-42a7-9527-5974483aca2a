@@ -81,65 +81,65 @@ Distincion operativa:
 
 Salieron de un analisis estatico del codigo que SI esta en el repo. Cada una rompe la compilacion:
 
-- [ ] `src/main/java/com/banco/prestamos/application/usecases/CreateLoanRequestUseCase.java` — `org.slf4j`
+- [x] `src/main/java/com/banco/prestamos/application/usecases/CreateLoanRequestUseCase.java` — `org.slf4j`
       El import org.slf4j.Logger pertenece a org.slf4j, pero ninguna dependencia declarada en el pom.xml cubre ese paquete. Falta agregar la dependencia o el import esta mal (libreria equivocada).
-- [ ] `src/main/java/com/banco/prestamos/infrastructure/adapters/IdempotencyServiceImpl.java` — `org.slf4j`
+- [x] `src/main/java/com/banco/prestamos/infrastructure/adapters/IdempotencyServiceImpl.java` — `org.slf4j`
       El import org.slf4j.Logger pertenece a org.slf4j, pero ninguna dependencia declarada en el pom.xml cubre ese paquete. Falta agregar la dependencia o el import esta mal (libreria equivocada).
-- [ ] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `io.swagger.v3`
+- [x] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `io.swagger.v3`
       El import io.swagger.v3.oas.annotations.Operation pertenece a io.swagger.v3, pero ninguna dependencia declarada en el pom.xml cubre ese paquete. Falta agregar la dependencia o el import esta mal (libreria equivocada).
-- [ ] `src/main/java/com/banco/prestamos/infrastructure/config/OpenApiConfig.java` — `io.swagger.v3`
+- [x] `src/main/java/com/banco/prestamos/infrastructure/config/OpenApiConfig.java` — `io.swagger.v3`
       El import io.swagger.v3.oas.models.Components pertenece a io.swagger.v3, pero ninguna dependencia declarada en el pom.xml cubre ese paquete. Falta agregar la dependencia o el import esta mal (libreria equivocada).
-- [ ] `src/main/java/com/banco/prestamos/infrastructure/exceptions/GlobalExceptionHandler.java` — `org.slf4j`
+- [x] `src/main/java/com/banco/prestamos/infrastructure/exceptions/GlobalExceptionHandler.java` — `org.slf4j`
       El import org.slf4j.Logger pertenece a org.slf4j, pero ninguna dependencia declarada en el pom.xml cubre ese paquete. Falta agregar la dependencia o el import esta mal (libreria equivocada).
-- [ ] `src/test/java/com/banco/prestamos/infrastructure/controllers/LoanRequestControllerTest.java` — `com.fasterxml.jackson`
+- [x] `src/test/java/com/banco/prestamos/infrastructure/controllers/LoanRequestControllerTest.java` — `com.fasterxml.jackson`
       El import com.fasterxml.jackson.databind.ObjectMapper pertenece a com.fasterxml.jackson, pero ninguna dependencia declarada en el pom.xml cubre ese paquete. Falta agregar la dependencia o el import esta mal (libreria equivocada).
-- [ ] `src/main/java/com/banco/prestamos/infrastructure/adapters/JpaLoanRequestRepository.java` — `LoanRequest.requestId`
+- [x] `src/main/java/com/banco/prestamos/infrastructure/adapters/JpaLoanRequestRepository.java` — `LoanRequest.requestId`
       Se invoca `requestId` sobre `LoanRequest`, pero esa clase no declara ese metodo. Agregalo con su implementacion real, o usa uno de los que si declara.
-- [ ] `src/main/java/com/banco/prestamos/infrastructure/adapters/IdempotencyServiceImpl.java` — `IdempotencyRecord.createdAt`
+- [x] `src/main/java/com/banco/prestamos/infrastructure/adapters/IdempotencyServiceImpl.java` — `IdempotencyRecord.createdAt`
       Se invoca `createdAt` sobre `IdempotencyRecord`, pero esa clase no declara ese metodo. Agregalo con su implementacion real, o usa uno de los que si declara.
-- [ ] `src/main/java/com/banco/prestamos/infrastructure/adapters/IdempotencyServiceImpl.java` — `IdempotencyRecord.ttlSeconds`
+- [x] `src/main/java/com/banco/prestamos/infrastructure/adapters/IdempotencyServiceImpl.java` — `IdempotencyRecord.ttlSeconds`
       Se invoca `ttlSeconds` sobre `IdempotencyRecord`, pero esa clase no declara ese metodo. Agregalo con su implementacion real, o usa uno de los que si declara.
-- [ ] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `LoanRequest.requestId`
+- [x] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `LoanRequest.requestId`
       Se invoca `requestId` sobre `LoanRequest`, pero esa clase no declara ese metodo. Agregalo con su implementacion real, o usa uno de los que si declara.
-- [ ] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `LoanRequest.customerId`
+- [x] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `LoanRequest.customerId`
       Se invoca `customerId` sobre `LoanRequest`, pero esa clase no declara ese metodo. Agregalo con su implementacion real, o usa uno de los que si declara.
-- [ ] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `LoanRequest.amount`
+- [x] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `LoanRequest.amount`
       Se invoca `amount` sobre `LoanRequest`, pero esa clase no declara ese metodo. Agregalo con su implementacion real, o usa uno de los que si declara.
-- [ ] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `LoanRequest.termMonths`
+- [x] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `LoanRequest.termMonths`
       Se invoca `termMonths` sobre `LoanRequest`, pero esa clase no declara ese metodo. Agregalo con su implementacion real, o usa uno de los que si declara.
-- [ ] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `LoanRequest.purpose`
+- [x] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `LoanRequest.purpose`
       Se invoca `purpose` sobre `LoanRequest`, pero esa clase no declara ese metodo. Agregalo con su implementacion real, o usa uno de los que si declara.
-- [ ] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `LoanRequest.status`
+- [x] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `LoanRequest.status`
       Se invoca `status` sobre `LoanRequest`, pero esa clase no declara ese metodo. Agregalo con su implementacion real, o usa uno de los que si declara.
-- [ ] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `LoanRequest.rejectionReason`
+- [x] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `LoanRequest.rejectionReason`
       Se invoca `rejectionReason` sobre `LoanRequest`, pero esa clase no declara ese metodo. Agregalo con su implementacion real, o usa uno de los que si declara.
-- [ ] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `LoanRequest.createdAt`
+- [x] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `LoanRequest.createdAt`
       Se invoca `createdAt` sobre `LoanRequest`, pero esa clase no declara ese metodo. Agregalo con su implementacion real, o usa uno de los que si declara.
-- [ ] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `LoanRequest.updatedAt`
+- [x] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `LoanRequest.updatedAt`
       Se invoca `updatedAt` sobre `LoanRequest`, pero esa clase no declara ese metodo. Agregalo con su implementacion real, o usa uno de los que si declara.
-- [ ] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `CreateLoanRequestRequest.idempotencyKey`
+- [x] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `CreateLoanRequestRequest.idempotencyKey`
       Se invoca `idempotencyKey` sobre `CreateLoanRequestRequest`, pero esa clase no declara ese metodo. Agregalo con su implementacion real, o usa uno de los que si declara.
-- [ ] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `CreateLoanRequestRequest.customerId`
+- [x] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `CreateLoanRequestRequest.customerId`
       Se invoca `customerId` sobre `CreateLoanRequestRequest`, pero esa clase no declara ese metodo. Agregalo con su implementacion real, o usa uno de los que si declara.
-- [ ] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `CreateLoanRequestRequest.amount`
+- [x] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `CreateLoanRequestRequest.amount`
       Se invoca `amount` sobre `CreateLoanRequestRequest`, pero esa clase no declara ese metodo. Agregalo con su implementacion real, o usa uno de los que si declara.
-- [ ] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `CreateLoanRequestRequest.termMonths`
+- [x] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `CreateLoanRequestRequest.termMonths`
       Se invoca `termMonths` sobre `CreateLoanRequestRequest`, pero esa clase no declara ese metodo. Agregalo con su implementacion real, o usa uno de los que si declara.
-- [ ] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `CreateLoanRequestRequest.purpose`
+- [x] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `CreateLoanRequestRequest.purpose`
       Se invoca `purpose` sobre `CreateLoanRequestRequest`, pero esa clase no declara ese metodo. Agregalo con su implementacion real, o usa uno de los que si declara.
-- [ ] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `LoanRequestRepository.findByCustomerId`
+- [x] `src/main/java/com/banco/prestamos/infrastructure/controllers/LoanRequestController.java` — `LoanRequestRepository.findByCustomerId`
       Se invoca `findByCustomerId` sobre `LoanRequestRepository`, pero esa clase no declara ese metodo. Agregalo con su implementacion real, o usa uno de los que si declara.
-- [ ] `src/test/java/com/banco/prestamos/application/usecases/CreateLoanRequestUseCaseTest.java` — `LoanRequest.customerId`
+- [x] `src/test/java/com/banco/prestamos/application/usecases/CreateLoanRequestUseCaseTest.java` — `LoanRequest.customerId`
       Se invoca `customerId` sobre `LoanRequest`, pero esa clase no declara ese metodo. Agregalo con su implementacion real, o usa uno de los que si declara.
-- [ ] `src/test/java/com/banco/prestamos/application/usecases/CreateLoanRequestUseCaseTest.java` — `LoanRequest.amount`
+- [x] `src/test/java/com/banco/prestamos/application/usecases/CreateLoanRequestUseCaseTest.java` — `LoanRequest.amount`
       Se invoca `amount` sobre `LoanRequest`, pero esa clase no declara ese metodo. Agregalo con su implementacion real, o usa uno de los que si declara.
-- [ ] `src/test/java/com/banco/prestamos/application/usecases/CreateLoanRequestUseCaseTest.java` — `LoanRequest.termMonths`
+- [x] `src/test/java/com/banco/prestamos/application/usecases/CreateLoanRequestUseCaseTest.java` — `LoanRequest.termMonths`
       Se invoca `termMonths` sobre `LoanRequest`, pero esa clase no declara ese metodo. Agregalo con su implementacion real, o usa uno de los que si declara.
-- [ ] `src/test/java/com/banco/prestamos/application/usecases/CreateLoanRequestUseCaseTest.java` — `LoanRequest.status`
+- [x] `src/test/java/com/banco/prestamos/application/usecases/CreateLoanRequestUseCaseTest.java` — `LoanRequest.status`
       Se invoca `status` sobre `LoanRequest`, pero esa clase no declara ese metodo. Agregalo con su implementacion real, o usa uno de los que si declara.
-- [ ] `src/test/java/com/banco/prestamos/application/usecases/CreateLoanRequestUseCaseTest.java` — `LoanRequestAlreadyExistsException.getMessage`
+- [x] `src/test/java/com/banco/prestamos/application/usecases/CreateLoanRequestUseCaseTest.java` — `LoanRequestAlreadyExistsException.getMessage`
       Se invoca `getMessage` sobre `LoanRequestAlreadyExistsException`, pero esa clase no declara ese metodo. Agregalo con su implementacion real, o usa uno de los que si declara.
-- [ ] `src/test/java/com/banco/prestamos/application/usecases/CreateLoanRequestUseCaseTest.java` — `LoanRequest.idempotencyKey`
+- [x] `src/test/java/com/banco/prestamos/application/usecases/CreateLoanRequestUseCaseTest.java` — `LoanRequest.idempotencyKey`
       Se invoca `idempotencyKey` sobre `LoanRequest`, pero esa clase no declara ese metodo. Agregalo con su implementacion real, o usa uno de los que si declara.
 
 ### Presentes (15)

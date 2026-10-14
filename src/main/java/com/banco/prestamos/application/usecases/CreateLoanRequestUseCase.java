@@ -37,6 +37,15 @@ public class CreateLoanRequestUseCase {
     @Transactional
     public LoanRequest execute(
             Long customerId,
+            BigDecimal amount,
+            Integer termMonths,
+            String idempotencyKey) {
+        return execute(customerId, idempotencyKey, amount, termMonths, "GENERAL");
+    }
+
+    @Transactional
+    public LoanRequest execute(
+            Long customerId,
             String idempotencyKey,
             BigDecimal amount,
             Integer termMonths,
@@ -65,10 +74,10 @@ public class CreateLoanRequestUseCase {
             customerId,
             amount,
             termMonths,
-            purpose,
             LoanStatus.PENDING,
             requestDate,
-            null
+            null,
+            idempotencyKey
         );
         
         LoanRequest savedRequest = loanRequestRepository.save(loanRequest);

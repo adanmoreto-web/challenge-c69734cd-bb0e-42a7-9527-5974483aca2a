@@ -57,10 +57,8 @@ public class LoanRequestController {
             @Positive(message = "El plazo debe ser mayor a cero")
             Integer termMonths,
 
-            @NotBlank(message = "El propósito del préstamo es obligatorio")
             String purpose,
 
-            @NotBlank(message = "La clave de idempotencia es obligatoria")
             String idempotencyKey
     ) {}
 
@@ -100,11 +98,16 @@ public class LoanRequestController {
             @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
     public ResponseEntity<LoanRequestResponse> createLoanRequest(
+            @RequestHeader(value = "Idempotency-Key", required = false) String idempotencyHeader,
             @Valid @RequestBody CreateLoanRequestRequest request) {
 
-        if (idempotencyService.isIdempotentKeyProcessed(request.idempotencyKey())) {
+        String idempotencyKey = (idempotencyHeader != null && !idempotencyHeader.isBlank())
+                ? idempotencyHeader
+                : request.idempotencyKey();
+
+        if (idempotencyKey != null && !idempotencyKey.isBlank() && idempotencyService.isIdempotentKeyProcessed(idempotencyKey)) {
             throw new LoanRequestAlreadyExistsException(
-                    "Ya existe una solicitud procesada con la clave de idempotencia: " + request.idempotencyKey()
+                    "Ya existe una solicitud procesada con la clave de idempotencia: " + idempotencyKey
             );
         }
 
@@ -112,16 +115,19 @@ public class LoanRequestController {
                 request.customerId(),
                 request.amount(),
                 request.termMonths(),
-                request.purpose()
+                idempotencyKey
         );
 
-        idempotencyService.markIdempotentKeyAsProcessed(
-                request.idempotencyKey(),
-                createdLoanRequest.requestId()
-        );
+        if (idempotencyKey != null && !idempotencyKey.isBlank()) {
+            idempotencyService.markIdempotentKeyAsProcessed(
+                    idempotencyKey,
+                    createdLoanRequest.requestId()
+            );
+        }
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
+                .header("Location", "/api/v1/loan-requests/" + createdLoanRequest.requestId())
                 .body(LoanRequestResponse.fromDomain(createdLoanRequest));
     }
 
