@@ -3,6 +3,7 @@ package com.banco.prestamos.infrastructure.controllers;
 import com.banco.prestamos.application.usecases.CreateLoanRequestUseCase;
 import com.banco.prestamos.domain.model.LoanRequest;
 import com.banco.prestamos.domain.model.LoanRequest.LoanStatus;
+import com.banco.prestamos.infrastructure.exceptions.GlobalExceptionHandler;
 import com.banco.prestamos.infrastructure.exceptions.LoanRequestAlreadyExistsException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,7 +42,9 @@ class LoanRequestControllerTest {
 
     @BeforeEach
     void setUp() {
-        mockMvc = MockMvcBuilders.standaloneSetup(loanRequestController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(loanRequestController)
+                .setControllerAdvice(new GlobalExceptionHandler())
+                .build();
         objectMapper = new ObjectMapper();
     }
 

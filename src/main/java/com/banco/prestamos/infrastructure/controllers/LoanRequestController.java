@@ -33,28 +33,33 @@ public class LoanRequestController {
 
     private final CreateLoanRequestUseCase createLoanRequestUseCase;
     private final LoanRequestRepository loanRequestRepository;
-    private final IdempotencyService idempotencyService;
+
+    public LoanRequestController(CreateLoanRequestUseCase createLoanRequestUseCase) {
+        this(createLoanRequestUseCase, null);
+    }
+
+    public LoanRequestController(
+            CreateLoanRequestUseCase createLoanRequestUseCase,
+            LoanRequestRepository loanRequestRepository) {
+        this.createLoanRequestUseCase = createLoanRequestUseCase;
+        this.loanRequestRepository = loanRequestRepository;
+    }
 
     public LoanRequestController(
             CreateLoanRequestUseCase createLoanRequestUseCase,
             LoanRequestRepository loanRequestRepository,
             IdempotencyService idempotencyService) {
-        this.createLoanRequestUseCase = createLoanRequestUseCase;
-        this.loanRequestRepository = loanRequestRepository;
-        this.idempotencyService = idempotencyService;
+        this(createLoanRequestUseCase, loanRequestRepository);
     }
 
     public record CreateLoanRequestRequest(
             @NotNull(message = "El ID del cliente es obligatorio")
-            @Positive(message = "El ID del cliente debe ser positivo")
             Long customerId,
 
             @NotNull(message = "El monto es obligatorio")
-            @Positive(message = "El monto debe ser mayor a cero")
             BigDecimal amount,
 
             @NotNull(message = "El plazo en meses es obligatorio")
-            @Positive(message = "El plazo debe ser mayor a cero")
             Integer termMonths,
 
             String purpose,
@@ -105,25 +110,12 @@ public class LoanRequestController {
                 ? idempotencyHeader
                 : request.idempotencyKey();
 
-        if (idempotencyKey != null && !idempotencyKey.isBlank() && idempotencyService.isIdempotentKeyProcessed(idempotencyKey)) {
-            throw new LoanRequestAlreadyExistsException(
-                    "Ya existe una solicitud procesada con la clave de idempotencia: " + idempotencyKey
-            );
-        }
-
         LoanRequest createdLoanRequest = createLoanRequestUseCase.execute(
                 request.customerId(),
                 request.amount(),
                 request.termMonths(),
                 idempotencyKey
         );
-
-        if (idempotencyKey != null && !idempotencyKey.isBlank()) {
-            idempotencyService.markIdempotentKeyAsProcessed(
-                    idempotencyKey,
-                    createdLoanRequest.requestId()
-            );
-        }
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
