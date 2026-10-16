@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -29,7 +28,16 @@ public class GlobalExceptionHandler {
             String path,
             LocalDateTime timestamp,
             Map<String, String> details
-    ) {}
+    ) {
+        public ErrorResponse {
+            details = details != null ? Map.copyOf(details) : null;
+        }
+
+        @Override
+        public Map<String, String> details() {
+            return details != null ? Map.copyOf(details) : null;
+        }
+    }
 
     @ExceptionHandler(LoanRequestAlreadyExistsException.class)
     public ResponseEntity<ErrorResponse> handleLoanRequestAlreadyExists(
@@ -39,7 +47,7 @@ public class GlobalExceptionHandler {
 
         ErrorResponse errorResponse = new ErrorResponse(
                 HttpStatus.CONFLICT.value(),
-                ex.getErrorCode() != null ? ex.getErrorCode() : "LOAN_REQUEST_DUPLICATE",
+                ex.getErrorCode(),
                 ex.getMessage(),
                 request.getDescription(false).replace("uri=", ""),
                 LocalDateTime.now(),
